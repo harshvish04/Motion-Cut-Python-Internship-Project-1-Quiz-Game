@@ -1,0 +1,62 @@
+import random
+
+class Quiz:
+    def __init__(self, questions):
+        self.questions = questions
+        self.score = 0
+
+    def ask_question(self, question, options, correct_answer):
+        print(question)
+        for i, option in enumerate(options, start=1):
+            print(f"{i}. {option}")
+
+        user_answer = input("Your answer (enter the corresponding number): ")
+        return user_answer
+
+    def check_answer(self, user_answer, correct_answer):
+        if user_answer.isdigit() and 1 <= int(user_answer) <= len(options):
+            user_answer = int(user_answer)
+            if options[user_answer - 1] == correct_answer:
+                print("Correct!")
+                self.score += 1
+            else:
+                print(f"Wrong! The correct answer is: {correct_answer}")
+        else:
+            print("Invalid input. Please enter a valid option number.")
+
+    def run_quiz(self):
+        for q in self.questions:
+            user_answer = self.ask_question(q["question"], q["options"], q["correct_answer"])
+            self.check_answer(user_answer, q["correct_answer"])
+
+    def display_final_score(self):
+        print(f"\nYour final score is: {self.score}/{len(self.questions)}")
+
+
+def main():
+    quiz_questions = [
+        {
+            "question": "In which city is JD College of Engineering and Management located?",
+            "options": ["Bangalore", "Mumbai", "Chennai", "Delhi"],
+            "correct_answer": "Bangalore",
+        },
+        {
+            "question": "What is the main focus of JD College of Engineering and Management?",
+            "options": ["Medical Sciences", "Computer Science", "Business Studies", "Environmental Engineering"],
+            "correct_answer": "Computer Science",
+        },
+        {
+            "question": "Who is the founder of JD College of Engineering and Management?",
+            "options": ["Dr. John Doe", "Prof. Jane Smith", "Mr. James Davis", "None of the above"],
+            "correct_answer": "None of the above",
+        },
+    ]
+
+    random.shuffle(quiz_questions)
+
+    quiz = Quiz(quiz_questions)
+    quiz.run_quiz()
+    quiz.display_final_score()
+
+if __name__ == "__main__":
+    main()
